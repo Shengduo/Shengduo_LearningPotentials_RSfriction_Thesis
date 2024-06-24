@@ -1,0 +1,44 @@
+\section{Conclusions}
+\label{sec:conclusions}
+\ifincludetext{
+In this study, 
+we have developed a potential-formulated friction that resembles the widely-used rate-and-state friction law. 
+By constructing the potentials using Recurrent Neural Operators (RNOs) and training them on generated rate-and-state slip-friction sequences, 
+we have verified that the potential friction formulation can capture the history dependencies well in rate-and-state friction, 
+which is widely observed from experimental data. 
+This suggests that there exists a potential-formulated friction law of our specific form that approximates the empirical rate-and-state friction well, 
+with a relative $L_2$ error in friction coefficient of $2 \times 10^{-4}$. 
+This is 2 orders of magnitude lower than the error between the best rate-and-state friction fit to real experimental data, 
+which implies that they likely will fit the experimental data similarly well. 
+We testify through different training runs that in our potential formulation, hidden variable $\xi$ is unique up to affine transformations.
+
+We have also confirmed by solving spring-slider systems that the potential friction formulation can facilitate implicit solves of initial value problems with rate-and-state frictional interfaces, 
+since the propagation of solution to the next time step can be written as a convex minimization problem. 
+We test whether or not the proposed potential formulation facilitates implicit solves of initial value problems by solving spring-slider dynamic problems under displacement-control loading. 
+We sample $77$ sequences with different spring constants and loading, 
+and out of them rate-and-state friction cannot solve over $50\%$ of the sequences with implicit solver, $46\%$ of the sequences with explicit solver. 
+While potential-formulated friction can solve all of these sequences, 
+with either implicit or explicit solver. 
+For the explicit solver, 
+rate-and-state friction still cannot solve those sequences with a time step $1/256$ of that of the potential-formulated friction.  ($2^{-19}$ vs $2^{-11}\ \mathrm{s}$). 
+Within the sequences that both explicit rate-and-state and implicit potential friction can solve, 
+they achieve similar accuracy as time step increases. 
+
+With all the advantages of the potential formulation for rate-and-state friction, 
+there is one drawback worth mentioning. 
+The potentials require a large number of sequences in the training dataset to achieve good test error. 
+Since compared to the original rate-and-state friction law, 
+there are much more parameters in the potentials from their Neural Network structure, 
+hundreds of sequences are required to avoid over-fitting and achieve good test error. 
+In practice, 
+it is sometimes difficult to obtain hundreds of sequences from experiments done on the same frictional interface, 
+while the original rate-and-state friction law in general requires a handful of sequences to fit the four parameters. 
+
+In the future, 
+we would work on finding closed-form approximations to the learnt potentials, 
+such that taking their gradients can be done more time-efficiently. 
+Right now since the potentials are still neural networks, 
+the differentiation process is time consuming. 
+We would work on fitting the potential formulations directly to experimental measurements and compare the fitting error with the original rate-and-state formulation. 
+}
+\fi

@@ -1,0 +1,58 @@
+\section{Introduction}
+\label{sec:introduction}
+
+In this study, 
+we adopt the Coulomb friction formulation, 
+where the shear traction $\tau$ over a point of a frictional interface $X$ is related to the applied normal traction $\sigma$ through friction coefficient $f$. 
+The friction coefficient, 
+in a general setting, 
+would depend on the slip history of that location $\left\{x(X, t') : t' \in [0, t]\right\}$, i.e., 
+\begin{align}
+    \tau(t, X) = \sigma(t, X) f\left(\left\{x(X, t') : t' \in [0, t]\right\}\right) \label{eq:generalFric}. 
+\end{align}
+
+\subsection{Rate-and-state friction}
+Building on the general friction formulation given by (\ref{eq:generalFric}), 
+rate-and-state friction further assumes that the dependency on slip history $\left\{x(X, t') : t' \in [0, t]\right\}$ is restricted to dependencies on the current slip rate, 
+$V = \dot{x}(X, t)$ and a state variable $\theta(X, t)$. 
+Inspired by experimental observations \cite{dieterich_modeling_1979, marone_laboratory-derived_1998, ruina_slip_1983}, 
+rate-and-state friction law postulates that the friction coefficient 
+\begin{align}
+    f^{RS}(X, t) = f_* + a \log\left(\frac{V(X, t)}{V_*}\right) + b \log\left(V_* \theta(X, t) /D_{RS}\right) \label{eq:fRS}, 
+\end{align}
+where $f_*$ is reference friction coefficient, 
+$V_*$ is reference slip rate, 
+$D_{RS}$ is characteristic slip distance and $a, b$ are dimensionless rate-and-state parameters, 
+and $\theta$ is a state variable that evolves with time. 
+The evolution of $\theta$ is given by the Dieterich ageing law \cite{dieterich_modeling_1979, ruina_slip_1983}:
+\begin{align}
+    \theta(X, t) = 1 - \frac{V(X, t) \theta(X, t)}{D_{RS}} \label{eq:AgeingLaw}. 
+\end{align}
+Since the formulation of rate-and-state friction only has local dependency on $X$, 
+i.e., no $\nabla X$ involved, 
+the computation of $f_{RS}$ is local and point-wise, 
+and thus usually $X$ is omitted without ambiguity. 
+Further, 
+at steady state ($\dot{\theta} = \dot{V} = 0$), 
+one can further get 
+\begin{align}
+    f_{ss}^{RS} = f_* + (a - b) \log \left(\frac{V_{ss}}{V_*}\right) \label{eq:fRSss}. 
+\end{align}
+If $a - b > 0$, 
+steady rate-and-state friction coefficient $f^{RS}$ increases as slip rate increase, 
+and the friction is rate-strengthening. 
+If $a - b < 0$, 
+the friction is rate-weakening. 
+Rate-weakening rate-and-state friction has been widely applied to the modeling of dynamic earthquakes, 
+since it can potentially be unstable under perturbations in slip rate \cite{dieterich_modeling_1979, 
+ marone_laboratory-derived_1998, ruina_slip_1983,rice_stability_1983, scholz_2019}. 
+
+It can be checked that there is no potential associated with the original rate-and-state formulation, 
+i.e., 
+we cannot find scalar potential functions whose gradients would yield both the friction coefficient $f^{RS}$ and the evolution law of $\theta$. 
+This property raises challenges in numerically solving dynamic boundary value problems with rate-and-state friction law. 
+While if the friction formulation has associated potentials, 
+the implicit solving process will be equivalent to a minimization problem, 
+which can be easier and more robust to solve implicitly. 
+The goal of this study is thus to find a friction law with a potential that not only has similar rate-and-state behaviors, 
+but also facilitates the fast and stable numerical solution of dynamic friction problems in application. 

@@ -1,0 +1,213 @@
+%% Copyright 2007-2020 Elsevier Ltd
+%% 
+%% This file is part of the 'Elsarticle Bundle'.
+%% ---------------------------------------------
+%% 
+%% It may be distributed under the conditions of the LaTeX Project Public
+%% License, either version 1.2 of this license or (at your option) any
+%% later version.  The latest version of this license is in
+%%    http://www.latex-project.org/lppl.txt
+%% and version 1.2 or later is part of all distributions of LaTeX
+%% version 1999/12/01 or later.
+%% 
+%% The list of all files belonging to the 'Elsarticle Bundle' is
+%% given in the file `manifest.txt'.
+%% 
+
+%% Template article for Elsevier's document class `elsarticle'
+%% with numbered style bibliographic references
+%% SP 2008/03/01
+%%
+%% 
+%%
+%% $Id: elsarticle-template-num.tex 190 2020-11-23 11:12:32Z rishi $
+%%
+%%
+\documentclass[final,a4paper]{elsarticle}
+\usepackage[centering,top=1in,bottom=1in,left=1in,right=1in]{geometry}
+\usepackage[dvipsnames]{xcolor}
+\geometry{letterpaper}
+% \documentclass[preprint,12pt]{elsarticle}
+
+%% Use the option review to obtain double line spacing
+%% \documentclass[authoryear,preprint,review,12pt]{elsarticle}
+
+%% Use the options 1p,twocolumn; 3p; 3p,twocolumn; 5p; or 5p,twocolumn
+%% for a journal layout:
+%% \documentclass[final,1p,times]{elsarticle}
+%% \documentclass[final,1p,times,twocolumn]{elsarticle}
+%% \documentclass[final,3p,times]{elsarticle}
+%% \documentclass[final,3p,times,twocolumn]{elsarticle}
+%% \documentclass[final,5p,times]{elsarticle}
+%% \documentclass[final,5p,times,twocolumn]{elsarticle}
+
+%% For including figures, graphicx.sty has been loaded in
+%% elsarticle.cls. If you prefer to use the old commands
+%% please give \usepackage{epsfig}
+
+%% The amssymb package provides various useful mathematical symbols
+\usepackage{amssymb}
+%% The amsthm package provides extended theorem environments
+\usepackage{amsthm}
+%% Include equations
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{bbm}
+
+\usepackage{mathrsfs}
+%% Include figures
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{subfigure}
+%% Enable clickable references
+\usepackage[hidelinks]{hyperref}
+%% For Table~s
+\usepackage{setspace}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage[section]{placeins}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{mathtools}
+
+%% Include Figure~path
+\graphicspath{{figures/}}
+\DeclareMathOperator{\argmin}{arg\,min}
+\DeclareMathOperator{\argmax}{arg\,max}
+\DeclareMathOperator{\arginf}{arg\,inf}
+\DeclareMathOperator{\argsup}{arg\,sup}
+% \DeclareMathOperator{\dim}{dim}
+\newcommand{\la}{\left\langle}
+\newcommand{\ra}{\right\rangle}
+%% The lineno packages adds line numbers. Start line numbering with
+%% \begin{linenumbers}, end it with \end{linenumbers}. Or switch it on
+%% for the whole article with \linenumbers.
+%% \usepackage{lineno}
+
+\journal{Journal of the Mechanics and Physics of Solids}
+
+% Flag to only show figures
+\newif\ifincludetext
+\includetexttrue
+% Flag to only show figures
+
+% Define new environment text
+
+% \usepackage{comment}
+% \ifincludetext
+%   \newenvironment{text}[1][]
+%   {}
+% \else
+%   \excludecomment{text}
+% \fi
+
+\begin{document}
+
+\begin{frontmatter}
+
+\title{Learning a potential formulation for rate-and-state friction with Recurrent Neural Operators (RNOs)}
+\affiliation[1]{organization={Mechanical and Civil Engineering, 
+California Institute of Technology},%Department and Organization
+            addressline={1200 E California Blvd}, 
+            city={Pasadena},
+            postcode={91125}, 
+            state={CA},
+            country={USA}}     
+\affiliation[2]{organization={Seismological Laboratory,          California Institute of Technology},%Department and Organization
+            addressline={1200 E California Blvd}, 
+            city={Pasadena},
+            postcode={91125}, 
+            state={CA},
+            country={USA}}
+            
+
+\author[1]{Shengduo Liu}
+\author[1]{Kaushik Bhattacharya}
+\author[1,2]{Nadia Lapusta}
+
+\begin{abstract}
+%% Text of abstract
+Rate-and-state friction law has been widely used in the geophysics community for numerical modeling of both dynamic earthquakes and slow slip events happening at geological faults. 
+In rate-and-state friction, 
+the friction coefficient depends on the both the local slip rate and a state variable, 
+whose evolution reflects the slip history of the location. 
+Rate-and-state friction law is an empirical law inspired by the behavior of friction coefficient upon sudden change of local slip rate. 
+The rate-and-state friction law is able to match the experimentally-measured friction coefficient as slip rate abruptly jumps with four parameters. 
+With different configurations of the friction parameters, 
+rate-and-state friction can be either rate-strengthening and rate-weakening. 
+If friction is rate-weakening, 
+then local increase in slip rate will result in a lower steady-state friction coefficient, 
+and thus can potentially lead to dynamic earthquakes. 
+
+However, 
+as rate-and-state friction is empirically derived, 
+it does not come naturally with a potential formulation, 
+and thus the solution of a dynamic problem with rate and state friction cannot be formulated as the stationary point of a functional. 
+This causes difficulties especially in implicit time discretization of dynamic slipping events. 
+In this study, 
+we propose a potential formulation of friction law that reproduces rate-and-state frictional behavior, 
+to facilitate implicit time discretization of dynamic problems. 
+We use Recurrent Neural Operators (RNOs) to model the proposed potentials,  
+and show that they can be trained to a high degree of accuracy using standard optimizers with relative $L_p$ loss functions in the framework of PyTorch. 
+Finally, 
+we verify that the learnt potential formulation indeed facilitates implicit time discretization of dynamic problems. 
+
+\end{abstract}
+
+%%Graphical abstract
+% \begin{graphicalabstract}
+% \includegraphics{grabs}
+% \end{graphicalabstract}
+
+%%Research highlights
+\begin{highlights}
+\item \textbf{Potential formulation for rate-and-state friction }: We have shown that there exists a specific potential formulation that accurately approximates the widely-used rate-and-state law of friction. 
+We construct the potentials as Recurrent Neural Operators (RNOs), 
+and train them on the friction-slip rate sequences generated from the original rate-and-state friction law. 
+The trained potentials can reproduce the original rate-and-state friction with a relative $L_2$ error of $2\times10^{-4}$. 
+
+\item \textbf{Rate-and-state fits experiments with $10^{-2}$ error}: Due to limited access to experimental data, 
+we have not trained the potentials directly on them. 
+Relevant work on fitting rate-and-state friction to experimental data suggests that the best-fitting sequence typically has a relative $L_2$ error of $2\times 10^{-2}$ against experimental data, 
+which is two orders of magnitudes higher compared to the fitting error between potential-formulated friction and rate-and-state friction. 
+Therefore, 
+we expect that the potential formulation will have similar capabilities to capture the rate and state features of experimental data as the original rate-and-state friction law.
+
+
+\item \textbf{Potential friction facilitates implicit time discretization}: We test whether or not the proposed potential formulation facilitates implicit time discretization of initial value problems.
+
+
+\end{highlights}
+
+\begin{keyword}
+%% keywords here, in the form: keyword \sep keyword
+rate-and-state friction \sep 
+potential formulation \sep 
+recurrent neural operator
+% %% PACS codes here, in the form: \PACS code \sep code
+% \PACS 0000 \sep 1111
+% %% MSC codes here, in the form: \MSC code \sep code
+% %% or \MSC[2008] code \sep code (2000 is the default)
+% \MSC 0000 \sep 1111
+\end{keyword}
+
+\end{frontmatter}
+
+%% \linenumbers
+
+%% main text
+\input{src/introduction}
+\input{src/method}
+\input{src/results}
+\input{src/conclusion}
+\input{src/appendix}
+
+
+%% If you have bibdatabase file and want bibtex to generate the
+%% bibitems, please use
+%%
+\newpage
+ \bibliographystyle{elsarticle-num} 
+ \bibliography{cas-refs}
+
+\end{document}
