@@ -12,9 +12,9 @@ This is 2 orders of magnitude lower than the error between the best rate-and-sta
 which implies that they likely will fit the experimental data similarly well. 
 We testify through different training runs that in our potential formulation, hidden variable $\xi$ is unique up to affine transformations.
 
-We have also confirmed by solving spring-slider systems that the potential friction formulation can facilitate implicit solves of initial value problems with rate-and-state frictional interfaces, 
+We have also confirmed by solving spring-slider systems that the potential friction formulation can facilitate implicit solution of initial value problems with rate-and-state frictional interfaces, 
 since the propagation of solution to the next time step can be written as a convex minimization problem. 
-We test whether or not the proposed potential formulation facilitates implicit solves of initial value problems by solving spring-slider dynamic problems under displacement-control loading. 
+We test whether or not the proposed potential formulation facilitates implicit solution of initial value problems by solving spring-slider dynamic problems under displacement-control loading. 
 We sample $77$ sequences with different spring constants and loading, 
 and out of them rate-and-state friction cannot solve over $50\%$ of the sequences with implicit solver, $46\%$ of the sequences with explicit solver. 
 While potential-formulated friction can solve all of these sequences, 

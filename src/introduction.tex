@@ -15,16 +15,16 @@ would depend on the slip history of that location $\left\{x(X, t') : t' \in [0, 
 Building on the general friction formulation given by (\ref{eq:generalFric}), 
 rate-and-state friction further assumes that the dependency on slip history $\left\{x(X, t') : t' \in [0, t]\right\}$ is restricted to dependencies on the current slip rate, 
 $V = \dot{x}(X, t)$ and a state variable $\theta(X, t)$. 
-Inspired by experimental observations \cite{dieterich_modeling_1979, marone_laboratory-derived_1998, ruina_slip_1983}, 
+Inspired by experimental observations \citep{dieterich_modeling_1979, marone_laboratory-derived_1998, ruina_slip_1983}, 
 rate-and-state friction law postulates that the friction coefficient 
 \begin{align}
-    f^{RS}(X, t) = f_* + a \log\left(\frac{V(X, t)}{V_*}\right) + b \log\left(V_* \theta(X, t) /D_{RS}\right) \label{eq:fRS}, 
+    f^{RS}(X, t) = f_* + a \log\left(\frac{V(X, t)}{V_*}\right) + b \log\left(\frac{V_* \theta(X, t)} {D_{RS}}\right) \label{eq:fRS}, 
 \end{align}
 where $f_*$ is reference friction coefficient, 
 $V_*$ is reference slip rate, 
 $D_{RS}$ is characteristic slip distance and $a, b$ are dimensionless rate-and-state parameters, 
 and $\theta$ is a state variable that evolves with time. 
-The evolution of $\theta$ is given by the Dieterich ageing law \cite{dieterich_modeling_1979, ruina_slip_1983}:
+The evolution of $\theta$ is given by the Dieterich ageing law \citep{dieterich_modeling_1979, ruina_slip_1983}:
 \begin{align}
     \theta(X, t) = 1 - \frac{V(X, t) \theta(X, t)}{D_{RS}} \label{eq:AgeingLaw}. 
 \end{align}
@@ -44,7 +44,7 @@ and the friction is rate-strengthening.
 If $a - b < 0$, 
 the friction is rate-weakening. 
 Rate-weakening rate-and-state friction has been widely applied to the modeling of dynamic earthquakes, 
-since it can potentially be unstable under perturbations in slip rate \cite{dieterich_modeling_1979, 
+since it can potentially be unstable under perturbations in slip rate \citep{dieterich_modeling_1979, 
  marone_laboratory-derived_1998, ruina_slip_1983,rice_stability_1983, scholz_2019}. 
 
 It can be checked that there is no potential associated with the original rate-and-state formulation, 

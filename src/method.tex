@@ -57,7 +57,7 @@ one needs to adjust $\Delta t$ such that $E^{in}$ dominates and $J$ is convex.
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.4\textwidth]{figures/SpringSlider.pdf}
+    \includegraphics[width=0.4\textwidth]{SpringSlider.pdf}
     \caption{Example: spring slider under displacement-control driving force}
     \label{fig:springslider}
 \end{figure}
@@ -87,13 +87,13 @@ if $D\left(\bm{\dot{\xi}}\right)$ is convex in $\bm{\dot{\xi}}$.
 
 \section{Neural Network and training}
 \label{sec:NN}
-We use Neural Networks to approximate the above potentials within the deeping learning environment PyTorch \cite{paszke2019pytorch}, i.e., 
+We use Neural Networks to approximate the above potentials within the deeping learning environment PyTorch \citep{paszke2019pytorch}, i.e., 
 \begin{align}
     W(x) \approx W_{NN}(x; w_W), 
     D^\dagger(\dot{x}, \bm{\xi}) \approx D^\dagger_{NN}(\dot{x}, \bm{\xi}; w_{D^\dagger}), 
     D^*\left(\dot{\bm{d}}\right) \approx D^*_{NN}\left(\dot{\bm{d}}, w_{D^*}\right)\label{eq:NNpotentials},  
 \end{align}
-and we call the resulting architecture a Recurrent Neural Operator (RNO) following \cite{BurigedeEric2023, BurigedeMarkovian2023}. 
+and we call the resulting architecture a Recurrent Neural Operator (RNO) following \citep{BurigedeEric2023, BurigedeMarkovian2023}. 
 
 To find proper $W, D^\dagger$ and $D$ that give $f^{NN}$ similar enough to $f^{RS}$ under a set of rate-and-state parameters, 
 we generate a synthetic dataset of $f^{RS}$'s by prescribing the slip histories $\{V = \dot{x}(t) : t \in [0, T]\}$. 
@@ -101,7 +101,7 @@ We then fit $f^{NN}$'s to $f^{RS}$'s by optimizing over the parameters of $W_{NN
 as shown in Figure~\ref{fig:training}. 
 \begin{figure}
     \centering
-    \includegraphics[width=0.8\textwidth]{figures/training.pdf}
+    \includegraphics[width=0.8\textwidth]{training.pdf}
     \caption{Training of $W, D^\dagger$ and $D$ through fitting $f^{NN}$ to $f^{RS}$}
     \label{fig:training}
 \end{figure}
@@ -115,14 +115,15 @@ the rate-and-state friction parameters are chosen to be
 \begin{align*}
     a &= 0.011, \\
     b &= 0.016, \\
-    D_{RS} &= 0.01, \\
-    f_* &= 0.58, 
+    V_* &= 1\times 10^{-6}\ \mathrm{m/s}, \\
+    D_{RS} &= 1\times10^{-8}\ \mathrm{m}, \\
+    f_* &= 0.5109,  % f_* &= 0.58, 
 \end{align*}
 such that we do examine the ability of potential formulated friction to fit rate-weakening ($a - b < 0$) rate-and-state friction, 
 which is more challenging to solve  numerically. 
 Regarding the specific choices of $V_i(t)$'s, 
-we take inspiration from both velocity jump tests for rate-and-state friction \cite{ruina_slip_1983}, 
-as well as continuous variation sequences from the previous studies of RNO \cite{BurigedeEric2023, BurigedeMarkovian2023}. 
+we take inspiration from both velocity jump tests for rate-and-state friction \citep{ruina_slip_1983}, 
+as well as continuous variation sequences from the previous studies of RNO \citep{BurigedeEric2023, BurigedeMarkovian2023}. 
 For the velocity jump sequences, 
 $V_i(t)$'s are simple functions, 
 i.e., the sum of a finite number of Heaviside functions, 
@@ -131,17 +132,24 @@ Note that the prescribed velocity jumps have to be on the log scale to cause sig
 While for the continuous variation sequences, 
 $V_i(t)$'s vary continuously with $t$ and change their monotonicity at randomly-sampled times, 
 as shown by the second example in Figure~\ref{fig:19thAnd99thRS}. 
+The range of prescribed $V_i(t)$'s is set such that $V_{i}(t) / V_* \in [10^{-3}, 10^{1}]$ for both types of sequences. 
+For easier plotting of displacements, 
+we define 
+\begin{align*}
+    D_* = V_* \cdot 1\ \mathrm{s} = 1\times10^{-6}\ \mathrm{m}. 
+\end{align*}
+
 \begin{figure}
     \centering
-    \includegraphics[height=0.3\textheight]{figures/19thRS.pdf}
-    \includegraphics[height=0.3\textheight]{figures/99thRS.pdf}
+    \includegraphics[height=0.3\textheight]{19thRS.pdf}
+    \includegraphics[height=0.3\textheight]{99thRS.pdf}
     \caption{Examples of velocity jump $V_i(t)$ (upper, sequence 19), 
     continuous variation $V_i(t)$ (lower, sequence 99) and their corresponding $f^{RS}$s in the synthetic dataset.}
     \label{fig:19thAnd99thRS}
 \end{figure}
 
 Within the training process, 
-we apply Optuna \cite{akiba2019optuna} optimization package for hyper-parameter tuning of the Recurrent Neural Operators (RNO). 
+we apply Optuna \citep{akiba2019optuna} optimization package for hyper-parameter tuning of the Recurrent Neural Operators (RNO). 
 Those hyper-parameters include learning rate, 
 depth of the Neural Network, 
 number of neurons within each layer, 
@@ -149,7 +157,7 @@ $p$ value for the $L_p$ norm,
 as well as the batch size in the training dataset. 
 Detailed algorithm regarding the training process can be found in Algorithm~\ref{alg:TrainingOneEpoch}. 
 
-\begin{algorithm}[H]
+\begin{algorithm}[htb!]
 \caption{Training $W_{NN}(x; w_W), D_{NN}^\dagger(\dot{x}, \bm{\xi}; w_{D^\dagger})$ and $D_{NN}^*(\dot{\bm{d}}; w_D)$}\label{alg:TrainingOneEpoch}
 \begin{algorithmic}
 %% Setting parameters
